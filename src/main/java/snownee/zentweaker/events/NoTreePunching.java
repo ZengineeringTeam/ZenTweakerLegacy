@@ -27,7 +27,6 @@ public class NoTreePunching
     @SubscribeEvent
     public static void onHarvestCheck(PlayerEvent.HarvestCheck event)
     {
-        System.out.println("hello");
         if (isLog(event.getTargetBlock()))
         {
             event.setCanHarvest(canPunchTree(event.getEntityPlayer()));
