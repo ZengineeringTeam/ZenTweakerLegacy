@@ -1,0 +1,16 @@
+[
+{
+  "modid": "zentweaker",
+  "name": "ZenTweaker",
+  "description": "Tweaker for the modpack: Zengineering.",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "",
+  "updateUrl": "",
+  "authorList": ["Snownee"],
+  "credits": "The Forge and FML guys",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]
