@@ -1,4 +1,4 @@
-package snownee.zentweaker.events;
+package snownee.zentweaker.features;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;

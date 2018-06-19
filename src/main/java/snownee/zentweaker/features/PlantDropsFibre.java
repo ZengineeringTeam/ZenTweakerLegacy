@@ -1,4 +1,4 @@
-package snownee.zentweaker.events;
+package snownee.zentweaker.features;
 
 import java.util.List;
 
@@ -18,13 +18,13 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 @EventBusSubscriber
 public class PlantDropsFibre
 {
-    private static final Item itemPlantFibre = Item.getByNameOrId("survivalist:plant_fibres");
+    private static final Item ITEM_PLANT_FIBRE = Item.getByNameOrId("survivalist:plant_fibres");
 
     @SubscribeEvent(priority = EventPriority.LOW)
     public static void onBlockDrops(BlockEvent.HarvestDropsEvent event)
     {
         List<ItemStack> drops = event.getDrops();
-        if (itemPlantFibre == null || event.isSilkTouching() || !drops.isEmpty() || drops instanceof ImmutableList)
+        if (ITEM_PLANT_FIBRE == null || event.isSilkTouching() || !drops.isEmpty() || drops instanceof ImmutableList)
         {
             return;
         }
@@ -35,7 +35,7 @@ public class PlantDropsFibre
         {
             if (event.getWorld().rand.nextFloat() < 0.4F)
             {
-                drops.add(new ItemStack(itemPlantFibre));
+                drops.add(new ItemStack(ITEM_PLANT_FIBRE));
             }
         }
     }
