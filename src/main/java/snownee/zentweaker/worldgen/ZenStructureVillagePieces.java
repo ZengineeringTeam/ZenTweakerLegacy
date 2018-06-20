@@ -2,7 +2,6 @@ package snownee.zentweaker.worldgen;
 
 import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 import java.util.Random;
 
 import javax.annotation.Nullable;
@@ -22,7 +21,6 @@ import net.minecraft.block.BlockSandStone;
 import net.minecraft.block.BlockStairs;
 import net.minecraft.block.BlockTorch;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.entity.monster.EntityZombieVillager;
@@ -68,6 +66,7 @@ public class ZenStructureVillagePieces
         MapGenStructureIO.registerStructureComponent(ZenStructureVillagePieces.House3.class, "ZenViTRH");
         MapGenStructureIO.registerStructureComponent(ZenStructureVillagePieces.Well.class, "ZenViW");
         LootTableList.register(new ResourceLocation(ZenTweaker.MODID, "chests/village_bookshelf"));
+        LootTableList.register(new ResourceLocation(ZenTweaker.MODID, "chests/village_blacksmith"));
         MinecraftForge.TERRAIN_GEN_BUS.register(new BetterVillageGen());
     }
 
@@ -867,6 +866,7 @@ public class ZenStructureVillagePieces
     public static class House1 extends Village
     {
         private static final Block BOOKSHELF;
+        private boolean hasMadeChest;
 
         static
         {
@@ -892,6 +892,20 @@ public class ZenStructureVillagePieces
                     && StructureComponent.findIntersecting(p_175850_1_, structureboundingbox) == null
                             ? new House1(start, p_175850_7_, rand, structureboundingbox, facing)
                             : null;
+        }
+
+        @Override
+        protected void writeStructureToNBT(NBTTagCompound tagCompound)
+        {
+            super.writeStructureToNBT(tagCompound);
+            tagCompound.setBoolean("Chest", this.hasMadeChest);
+        }
+
+        @Override
+        protected void readStructureFromNBT(NBTTagCompound tagCompound, TemplateManager p_143011_2_)
+        {
+            super.readStructureFromNBT(tagCompound, p_143011_2_);
+            this.hasMadeChest = tagCompound.getBoolean("Chest");
         }
 
         /**
@@ -968,13 +982,14 @@ public class ZenStructureVillagePieces
             this.fillWithBlocks(worldIn, structureBoundingBoxIn, 1, 4, 1, 7, 4, 1, iblockstate4, iblockstate4, false);
             this.fillWithBlocks(worldIn, structureBoundingBoxIn, 1, 4, 4, 7, 4, 4, iblockstate4, iblockstate4, false);
 
-            IBlockState stateBook = BOOKSHELF.getDefaultState();
-            if (BOOKSHELF != Blocks.BOOKSHELF)
-            {
-                Map<IProperty<?>, Comparable<?>> map = BOOKSHELF.getDefaultState().getProperties();
-            }
-            
+            IBlockState stateBook = BOOKSHELF.getDefaultState(); // TODO: types
             this.fillWithBlocks(worldIn, structureBoundingBoxIn, 1, 3, 4, 7, 3, 4, stateBook, stateBook, false);
+
+            if (!this.hasMadeChest)
+            {
+                this.hasMadeChest = true;
+                // do sth
+            }
 
             this.setBlockState(worldIn, iblockstate4, 7, 1, 4, structureBoundingBoxIn);
             this.setBlockState(worldIn, iblockstate3, 7, 1, 3, structureBoundingBoxIn);
@@ -1046,9 +1061,6 @@ public class ZenStructureVillagePieces
                             : null;
         }
 
-        /**
-         * (abstract) Helper method to write subclass data to NBT
-         */
         @Override
         protected void writeStructureToNBT(NBTTagCompound tagCompound)
         {
@@ -1056,9 +1068,6 @@ public class ZenStructureVillagePieces
             tagCompound.setBoolean("Chest", this.hasMadeChest);
         }
 
-        /**
-         * (abstract) Helper method to read subclass data from NBT
-         */
         @Override
         protected void readStructureFromNBT(NBTTagCompound tagCompound, TemplateManager p_143011_2_)
         {
@@ -1132,7 +1141,7 @@ public class ZenStructureVillagePieces
                     && structureBoundingBoxIn.isVecInside(new BlockPos(this.getXWithOffset(5, 5), this.getYWithOffset(1), this.getZWithOffset(5, 5))))
             {
                 this.hasMadeChest = true;
-                this.generateChest(worldIn, structureBoundingBoxIn, randomIn, 5, 1, 5, LootTableList.CHESTS_VILLAGE_BLACKSMITH);
+                this.generateChest(worldIn, structureBoundingBoxIn, randomIn, 5, 1, 5, new ResourceLocation(ZenTweaker.MODID, "chests/village_blacksmith"));
             }
 
             for (int i = 6; i <= 8; ++i)
