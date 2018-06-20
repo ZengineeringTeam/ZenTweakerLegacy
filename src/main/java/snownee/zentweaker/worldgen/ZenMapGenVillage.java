@@ -1,6 +1,5 @@
 package snownee.zentweaker.worldgen;
 
-import java.lang.reflect.Field;
 import java.util.List;
 import java.util.Random;
 
@@ -11,19 +10,15 @@ import net.minecraft.world.gen.structure.StructureComponent;
 import net.minecraft.world.gen.structure.StructureStart;
 import net.minecraft.world.gen.structure.StructureVillagePieces;
 import net.minecraft.world.gen.structure.StructureVillagePieces.PieceWeight;
-import net.minecraftforge.fml.relauncher.ReflectionHelper;
 
 public class ZenMapGenVillage extends MapGenVillage
 {
-    private static final Field FIELD_SIZE = ReflectionHelper.findField(MapGenVillage.class, "field_75054_f", "size");
-
     @Override
     protected StructureStart getStructureStart(int chunkX, int chunkZ)
     {
         try
         {
-            int mySize = FIELD_SIZE.getInt(this);
-            return new ZenMapGenVillage.Start(this.world, this.rand, chunkX, chunkZ, mySize);
+            return new ZenMapGenVillage.Start(this.world, this.rand, chunkX, chunkZ, this.size);
         }
         catch (Exception e)
         {

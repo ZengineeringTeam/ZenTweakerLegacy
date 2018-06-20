@@ -8,12 +8,11 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import snownee.zentweaker.worldgen.ZenStructureVillagePieces;
 
-@Mod(modid = ZenTweaker.MODID, name = ZenTweaker.NAME, version = ZenTweaker.VERSION)
+@Mod(modid = ZenTweaker.MODID, name = ZenTweaker.NAME, version = "@VERSION_INJECT@")
 public class ZenTweaker
 {
     public static final String MODID = "zentweaker";
     public static final String NAME = "ZenTweaker";
-    public static final String VERSION = "@VERSION_INJECT@";
 
     private static Logger logger;
 

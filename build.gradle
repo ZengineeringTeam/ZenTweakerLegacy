@@ -27,6 +27,12 @@ repositories {
     }
 }
 
+jar {
+    manifest {
+        attributes 'FMLAT': 'zentweaker_at.cfg'
+    }
+}
+
 minecraft {
     version = "${minecraft_version}-${forge_version}"
     runDir = "run"
