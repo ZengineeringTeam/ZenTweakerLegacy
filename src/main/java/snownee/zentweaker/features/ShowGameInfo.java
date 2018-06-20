@@ -3,6 +3,7 @@ package snownee.zentweaker.features;
 import java.util.ArrayList;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
@@ -123,7 +124,7 @@ public class ShowGameInfo
     public static void onItemRegister(RegistryEvent.Register<Item> event)
     {
         event.getRegistry().register(itemDepthMeter = new Item().setRegistryName(ZenTweaker.MODID, "depth_meter").setUnlocalizedName(ZenTweaker.MODID
-                + ".depth_meter").setMaxStackSize(1));
+                + ".depth_meter").setMaxStackSize(1).setCreativeTab(CreativeTabs.TOOLS));
     }
 
     @SubscribeEvent
