@@ -13,7 +13,7 @@ public final class KeepMapOnDeath {
 
     @SubscribeEvent(priority = EventPriority.LOWEST)
     public static void onPlayerDeath(PlayerEvent.Clone event) {
-        if (event.isWasDeath()) {
+        if (event.isWasDeath() && !event.getOriginal().world.getGameRules().getBoolean("keepInventory")) {
             for (ItemStack item : event.getOriginal().inventory.mainInventory) {
                 if (!item.isEmpty() && (item.getItem() == Items.FILLED_MAP)) {
                     event.getEntityPlayer().addItemStackToInventory(item);
