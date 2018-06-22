@@ -1,16 +1,25 @@
 package snownee.zentweaker.features;
 
 import net.minecraft.init.Items;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 import snownee.zentweaker.ZenTweaker;
 
+@GameRegistry.ObjectHolder(ZenTweaker.MODID)
 @Mod.EventBusSubscriber(modid = ZenTweaker.MODID)
 public final class KeepMapOnDeath
 {
+
+    @GameRegistry.ObjectHolder("antiqueatlas:antique_atlas")
+    public static final Item ANTIQUE_ATLAS = Items.AIR;
+
+    @GameRegistry.ObjectHolder("antiqueatlas:empty_antique_atlas")
+    public static final Item EMPTY_ATLAS = Items.AIR;
 
     @SubscribeEvent(priority = EventPriority.LOWEST)
     public static void onPlayerDeath(PlayerEvent.Clone event)
@@ -19,9 +28,7 @@ public final class KeepMapOnDeath
         {
             for (ItemStack item : event.getOriginal().inventory.mainInventory)
             {
-                if (!item.isEmpty() && (item.getItem() == Items.FILLED_MAP || item.getItem() == Items.MAP
-                        || item.getItem().getRegistryName().toString().equals("antiqueatlas:antique_atlas")
-                        || item.getItem().getRegistryName().toString().equals("antiqueatlas:empty_antique_atlas")))
+                if (!item.isEmpty() && isMap(item))
                 {
                     event.getEntityPlayer().addItemStackToInventory(item);
                 }
@@ -31,7 +38,7 @@ public final class KeepMapOnDeath
 
     private static boolean isMap(ItemStack stack)
     {
-        return false;
+        return stack.getItem().isMap() || stack.getItem() == ANTIQUE_ATLAS || stack.getItem() == EMPTY_ATLAS;
     }
 
 }
