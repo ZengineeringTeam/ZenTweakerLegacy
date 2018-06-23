@@ -1,50 +1,65 @@
 package snownee.zentweaker.features;
 
-import net.minecraft.init.Items;
-import net.minecraft.item.Item;
+import java.util.ListIterator;
+
+import javax.annotation.Nonnull;
+
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.EnumHand;
+import net.minecraftforge.common.util.FakePlayer;
+import net.minecraftforge.event.entity.player.PlayerDropsEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.fml.common.registry.GameRegistry;
 import snownee.zentweaker.ZenTweaker;
 
-@GameRegistry.ObjectHolder(ZenTweaker.MODID)
 @Mod.EventBusSubscriber(modid = ZenTweaker.MODID)
 public final class KeepMapOnDeath
 {
-
-    @GameRegistry.ObjectHolder("antiqueatlas:antique_atlas")
-    public static final Item ANTIQUE_ATLAS = Items.AIR;
-
-    @GameRegistry.ObjectHolder("antiqueatlas:empty_antique_atlas")
-    public static final Item EMPTY_ATLAS = Items.AIR;
-
-    @SubscribeEvent(priority = EventPriority.LOWEST)
+    @SubscribeEvent(priority = EventPriority.HIGHEST)
     public static void onPlayerDeath(PlayerEvent.Clone event)
     {
-        if (event.isWasDeath() && !event.getOriginal().world.getGameRules().getBoolean("keepInventory"))
+        if (!event.isWasDeath() || event.getOriginal() == null || event.getEntityPlayer() == null
+                || event.getEntityPlayer() instanceof FakePlayer
+                || event.getOriginal().world.getGameRules().getBoolean("keepInventory"))
         {
-            for (ItemStack item : event.getOriginal().inventory.mainInventory)
+            return;
+        }
+        for (int i = 0; i < event.getOriginal().inventory.mainInventory.size(); i++)
+        {
+            ItemStack item = event.getOriginal().inventory.mainInventory.get(i);
+            if (!item.isEmpty() && isMap(item))
             {
-                if (!item.isEmpty() && isMap(item))
-                {
-                    event.getEntityPlayer().addItemStackToInventory(item);
-                }
-            }
-            ItemStack heldInOffHand = event.getOriginal().inventory.offHandInventory.get(0);
-            if (!heldInOffHand.isEmpty() && isMap(heldInOffHand))
-            {
-                event.getEntityPlayer().setHeldItem(EnumHand.OFF_HAND, heldInOffHand);
+                event.getEntityPlayer().inventory.addItemStackToInventory(item);
+                event.getOriginal().inventory.mainInventory.set(i, ItemStack.EMPTY);
             }
         }
     }
 
-    private static boolean isMap(ItemStack stack)
+    @SubscribeEvent(priority = EventPriority.HIGHEST)
+    public static void itemDrop(PlayerDropsEvent event)
     {
-        return stack.getItem().isMap() || stack.getItem() == ANTIQUE_ATLAS || stack.getItem() == EMPTY_ATLAS;
+        if (event.getEntityPlayer() == null || event.getEntityPlayer() instanceof FakePlayer
+                || event.getEntityPlayer().world.getGameRules().getBoolean("keepInventory") || event.isCanceled())
+        {
+            return;
+        }
+        ListIterator<EntityItem> iter = event.getDrops().listIterator();
+        while (iter.hasNext())
+        {
+            EntityItem e = iter.next();
+            if (!e.getItem().isEmpty() && isMap(e.getItem()))
+            {
+                event.getEntityPlayer().inventory.addItemStackToInventory(e.getItem());
+                iter.remove();
+            }
+        }
+    }
+
+    private static boolean isMap(@Nonnull ItemStack stack)
+    {
+        return stack.getItem().isMap() || stack.getItem().getRegistryName().getResourceDomain().equals("antiqueatlas");
     }
 
 }
