@@ -1,0 +1,29 @@
+{
+  "type": "forge:ore_shaped",
+  "result": {
+    "item": "minecraft:wooden_pickaxe",
+    "data": 0
+  },
+  "pattern": [
+    "fs",
+    "/f"
+  ],
+  "key": {
+    "/": {
+      "ore": "stickWood",
+      "type": "forge:ore_dict"
+    },
+    "s": [
+      {
+        "item": "zentweaker:plant_string"
+      },
+      {
+        "ore": "string",
+        "type": "forge:ore_dict"
+      }
+    ],
+    "f": {
+      "item": "minecraft:flint"
+    }
+  }
+}

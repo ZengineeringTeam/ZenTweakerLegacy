@@ -3,36 +3,29 @@ package snownee.zentweaker.features;
 import java.util.ArrayList;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentTranslation;
-import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
-import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import snownee.zentweaker.ZenTweaker;
-import snownee.zentweaker.utils.ModelUtil;
+import snownee.zentweaker.items.ItemRegistry;
 
 @EventBusSubscriber
 public class ShowGameInfo
 {
-    public static Item itemDepthMeter;
-
     @SubscribeEvent
     @SideOnly(Side.CLIENT)
     public static void onItemRightClick(PlayerInteractEvent.RightClickItem event)
     {
-        if (event.getSide() == Side.CLIENT && event.getItemStack().getItem() == itemDepthMeter)
+        if (event.getSide() == Side.CLIENT && event.getItemStack().getItem() == ItemRegistry.itemDepthMeter)
         {
             EntityPlayer player = event.getEntityPlayer();
             player.sendStatusMessage(new TextComponentTranslation("gui.zentweaker.depth", player.world.getSeaLevel()
@@ -76,7 +69,7 @@ public class ShowGameInfo
             {
                 showXZ = true;
             }
-            else if (stack.getItem() == itemDepthMeter)
+            else if (stack.getItem() == ItemRegistry.itemDepthMeter)
             {
                 showY = true;
             }
@@ -118,19 +111,5 @@ public class ShowGameInfo
             }
             left.remove(i);
         }
-    }
-
-    @SubscribeEvent
-    public static void onItemRegister(RegistryEvent.Register<Item> event)
-    {
-        event.getRegistry().register(itemDepthMeter = new Item().setRegistryName(ZenTweaker.MODID, "depth_meter").setUnlocalizedName(ZenTweaker.MODID
-                + ".depth_meter").setMaxStackSize(1).setCreativeTab(CreativeTabs.TOOLS));
-    }
-
-    @SubscribeEvent
-    @SideOnly(Side.CLIENT)
-    public static void onModelRegister(@SuppressWarnings("unused") ModelRegistryEvent event)
-    {
-        ModelUtil.mapItemModel(itemDepthMeter);
     }
 }

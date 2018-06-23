@@ -1,0 +1,15 @@
+{
+  "type": "forge:ore_shaped",
+  "result": {
+    "item": "zentweaker:plant_string"
+  },
+  "pattern": [
+    "**",
+    "**"
+  ],
+  "key": {
+    "*": {
+      "item": "zentweaker:plant_fibre"
+    }
+  }
+}
