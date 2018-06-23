@@ -53,13 +53,13 @@ public class NoTreePunching
             return false;
         }
         ItemStack tool = player.getHeldItemMainhand();
-        return tool != null && !tool.isEmpty() && tool.getItem().getToolClasses(tool).contains("axe");
+        return !tool.isEmpty() && tool.getItem().getToolClasses(tool).contains("axe");
     }
 
     public static boolean isLog(IBlockState state)
     {
         ItemStack itemblock = new ItemStack(state.getBlock());
-        if (itemblock == null || itemblock.isEmpty())
+        if (itemblock.isEmpty())
         {
             return false;
         }
