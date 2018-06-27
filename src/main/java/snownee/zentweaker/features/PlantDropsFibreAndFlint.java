@@ -9,6 +9,7 @@ import net.minecraft.block.BlockTallGrass.EnumType;
 import net.minecraft.block.BlockVine;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
@@ -17,7 +18,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import snownee.zentweaker.items.ItemRegistry;
 
 @EventBusSubscriber
-public class PlantDropsFibre
+public class PlantDropsFibreAndFlint
 {
     @SubscribeEvent(priority = EventPriority.LOW)
     public static void onBlockDrops(BlockEvent.HarvestDropsEvent event)
@@ -35,6 +36,15 @@ public class PlantDropsFibre
             if (event.getWorld().rand.nextFloat() < 0.4F)
             {
                 drops.add(new ItemStack(ItemRegistry.itemPlantFibre));
+            }
+        }
+        else if (state.getBlock().getRegistryName().getResourcePath().equals("dirt")
+                && event.getWorld().rand.nextFloat() < 0.15F)
+        {
+            if (event.getWorld().rand.nextFloat() < 0.4F)
+            {
+                drops.clear();
+                drops.add(new ItemStack(Items.FLINT));
             }
         }
     }
