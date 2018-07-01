@@ -64,7 +64,6 @@ public class ZenStructureVillagePieces
         MapGenStructureIO.registerStructureComponent(ZenStructureVillagePieces.Start.class, "ZenViStart");
         MapGenStructureIO.registerStructureComponent(ZenStructureVillagePieces.Path.class, "ZenViSR");
         MapGenStructureIO.registerStructureComponent(ZenStructureVillagePieces.House3.class, "ZenViTRH");
-        MapGenStructureIO.registerStructureComponent(ZenStructureVillagePieces.Well.class, "ZenViW");
         LootTableList.register(new ResourceLocation(ZenTweaker.MODID, "chests/village_bookshelf"));
         LootTableList.register(new ResourceLocation(ZenTweaker.MODID, "chests/village_blacksmith"));
         MinecraftForge.TERRAIN_GEN_BUS.register(new BetterVillageGen());
@@ -323,47 +322,56 @@ public class ZenStructureVillagePieces
                 this.boundingBox.offset(0, this.averageGroundLvl - this.boundingBox.maxY + 12 - 1, 0);
             }
 
-            Block block = Blocks.COBBLESTONE;
+            IBlockState cobble = Blocks.COBBLESTONE.getDefaultState();
             Block stairs = Blocks.STONE_STAIRS;
             if (structureType == 1)
             {
-                Block temp = Block.getBlockFromName("quark:sandy_bricks");
-                if (temp != null)
+                if (randomIn.nextInt(5) == 0)
                 {
-                    block = temp;
+                    Block temp_block = Block.getBlockFromName("quark:sandy_bricks");
+                    Block temp_stairs = Block.getBlockFromName("quark:sandy_bricks_stairs");
+                    if (temp_block != null && temp_stairs != null)
+                    {
+                        cobble = temp_block.getDefaultState();
+                        stairs = temp_stairs;
+                    }
                 }
-                temp = Block.getBlockFromName("quark:sandy_bricks_stairs");
-                if (stairs != null)
+                else
                 {
-                    stairs = temp;
+                    Block temp_block = Block.getBlockFromName("quark:sandstone_new");
+                    Block temp_stairs = Block.getBlockFromName("quark:sandstone_bricks_stairs");
+                    if (temp_block != null && temp_stairs != null)
+                    {
+                        cobble = temp_block.getStateFromMeta(1);
+                        stairs = temp_stairs;
+                    }
                 }
             }
-            IBlockState iblockstate = block.getDefaultState();
             IBlockState iblockstate1 = stairs.getDefaultState().withProperty(BlockStairs.FACING, EnumFacing.NORTH);
             IBlockState iblockstate2 = stairs.getDefaultState().withProperty(BlockStairs.FACING, EnumFacing.WEST);
             IBlockState iblockstate3 = stairs.getDefaultState().withProperty(BlockStairs.FACING, EnumFacing.EAST);
             this.fillWithBlocks(worldIn, structureBoundingBoxIn, 1, 1, 1, 3, 3, 7, Blocks.AIR.getDefaultState(), Blocks.AIR.getDefaultState(), false);
             this.fillWithBlocks(worldIn, structureBoundingBoxIn, 1, 5, 1, 3, 9, 3, Blocks.AIR.getDefaultState(), Blocks.AIR.getDefaultState(), false);
-            this.fillWithBlocks(worldIn, structureBoundingBoxIn, 1, 0, 0, 3, 0, 8, iblockstate, iblockstate, false);
-            this.fillWithBlocks(worldIn, structureBoundingBoxIn, 1, 1, 0, 3, 10, 0, iblockstate, iblockstate, false);
-            this.fillWithBlocks(worldIn, structureBoundingBoxIn, 0, 1, 1, 0, 10, 3, iblockstate, iblockstate, false);
-            this.fillWithBlocks(worldIn, structureBoundingBoxIn, 4, 1, 1, 4, 10, 3, iblockstate, iblockstate, false);
-            this.fillWithBlocks(worldIn, structureBoundingBoxIn, 0, 0, 4, 0, 4, 7, iblockstate, iblockstate, false);
-            this.fillWithBlocks(worldIn, structureBoundingBoxIn, 4, 0, 4, 4, 4, 7, iblockstate, iblockstate, false);
-            this.fillWithBlocks(worldIn, structureBoundingBoxIn, 1, 1, 8, 3, 4, 8, iblockstate, iblockstate, false);
-            this.fillWithBlocks(worldIn, structureBoundingBoxIn, 1, 5, 4, 3, 10, 4, iblockstate, iblockstate, false);
-            this.fillWithBlocks(worldIn, structureBoundingBoxIn, 1, 5, 5, 3, 5, 7, iblockstate, iblockstate, false);
-            this.fillWithBlocks(worldIn, structureBoundingBoxIn, 0, 9, 0, 4, 9, 4, iblockstate, iblockstate, false);
-            this.fillWithBlocks(worldIn, structureBoundingBoxIn, 0, 4, 0, 4, 4, 4, iblockstate, iblockstate, false);
-            this.setBlockState(worldIn, iblockstate, 0, 11, 2, structureBoundingBoxIn);
-            this.setBlockState(worldIn, iblockstate, 4, 11, 2, structureBoundingBoxIn);
-            this.setBlockState(worldIn, iblockstate, 2, 11, 0, structureBoundingBoxIn);
-            this.setBlockState(worldIn, iblockstate, 2, 11, 4, structureBoundingBoxIn);
-            this.setBlockState(worldIn, iblockstate, 1, 1, 6, structureBoundingBoxIn);
-            this.setBlockState(worldIn, iblockstate, 1, 1, 7, structureBoundingBoxIn);
-            this.setBlockState(worldIn, iblockstate, 2, 1, 7, structureBoundingBoxIn);
-            this.setBlockState(worldIn, iblockstate, 3, 1, 6, structureBoundingBoxIn);
-            this.setBlockState(worldIn, iblockstate, 3, 1, 7, structureBoundingBoxIn);
+            this.fillWithBlocks(worldIn, structureBoundingBoxIn, 1, 0, 0, 3, 0, 8, cobble, cobble, false);
+            this.fillWithBlocks(worldIn, structureBoundingBoxIn, 1, 1, 0, 3, 10, 0, cobble, cobble, false);
+            this.fillWithBlocks(worldIn, structureBoundingBoxIn, 0, 1, 1, 0, 10, 3, cobble, cobble, false);
+            this.fillWithBlocks(worldIn, structureBoundingBoxIn, 4, 1, 1, 4, 10, 3, cobble, cobble, false);
+            this.fillWithBlocks(worldIn, structureBoundingBoxIn, 0, 0, 4, 0, 4, 7, cobble, cobble, false);
+            this.fillWithBlocks(worldIn, structureBoundingBoxIn, 4, 0, 4, 4, 4, 7, cobble, cobble, false);
+            this.fillWithBlocks(worldIn, structureBoundingBoxIn, 1, 1, 8, 3, 4, 8, cobble, cobble, false);
+            this.fillWithBlocks(worldIn, structureBoundingBoxIn, 1, 5, 4, 3, 10, 4, cobble, cobble, false);
+            this.fillWithBlocks(worldIn, structureBoundingBoxIn, 1, 5, 5, 3, 5, 7, cobble, cobble, false);
+            this.fillWithBlocks(worldIn, structureBoundingBoxIn, 0, 9, 0, 4, 9, 4, cobble, cobble, false);
+            this.fillWithBlocks(worldIn, structureBoundingBoxIn, 0, 4, 0, 4, 4, 4, cobble, cobble, false);
+            this.setBlockState(worldIn, cobble, 0, 11, 2, structureBoundingBoxIn);
+            this.setBlockState(worldIn, cobble, 4, 11, 2, structureBoundingBoxIn);
+            this.setBlockState(worldIn, cobble, 2, 11, 0, structureBoundingBoxIn);
+            this.setBlockState(worldIn, cobble, 2, 11, 4, structureBoundingBoxIn);
+            this.setBlockState(worldIn, cobble, 1, 1, 6, structureBoundingBoxIn);
+            this.setBlockState(worldIn, cobble, 1, 1, 7, structureBoundingBoxIn);
+            this.setBlockState(worldIn, cobble, 2, 1, 7, structureBoundingBoxIn);
+            this.setBlockState(worldIn, cobble, 3, 1, 6, structureBoundingBoxIn);
+            this.setBlockState(worldIn, cobble, 3, 1, 7, structureBoundingBoxIn);
             this.setBlockState(worldIn, iblockstate1, 1, 1, 5, structureBoundingBoxIn);
             this.setBlockState(worldIn, iblockstate1, 2, 1, 6, structureBoundingBoxIn);
             this.setBlockState(worldIn, iblockstate1, 3, 1, 5, structureBoundingBoxIn);
@@ -417,7 +425,7 @@ public class ZenStructureVillagePieces
                 for (int j = 0; j < 5; ++j)
                 {
                     this.clearCurrentPositionBlocksUpwards(worldIn, j, 12, k, structureBoundingBoxIn);
-                    this.replaceAirAndLiquidDownwards(worldIn, iblockstate, j, -1, k, structureBoundingBoxIn);
+                    this.replaceAirAndLiquidDownwards(worldIn, cobble, j, -1, k, structureBoundingBoxIn);
                 }
             }
 
@@ -1731,7 +1739,6 @@ public class ZenStructureVillagePieces
         public Start(BiomeProvider biomeProviderIn, int p_i2104_2_, Random rand, int p_i2104_4_, int p_i2104_5_, List<PieceWeight> p_i2104_6_, int p_i2104_7_)
         {
             super(biomeProviderIn, p_i2104_2_, rand, p_i2104_4_, p_i2104_5_, p_i2104_6_, p_i2104_7_);
-
         }
 
         @Override
@@ -2183,96 +2190,6 @@ public class ZenStructureVillagePieces
         protected void setStructureType(int p_189924_1_)
         {
             this.structureType = p_189924_1_;
-        }
-    }
-
-    public static class Well extends Village
-    {
-        public Well()
-        {
-        }
-
-        public Well(Start start, int type, Random rand, int x, int z)
-        {
-            super(start, type);
-            this.setCoordBaseMode(EnumFacing.Plane.HORIZONTAL.random(rand));
-
-            if (this.getCoordBaseMode().getAxis() == EnumFacing.Axis.Z)
-            {
-                this.boundingBox = new StructureBoundingBox(x, 64, z, x + 6 - 1, 78, z + 6 - 1);
-            }
-            else
-            {
-                this.boundingBox = new StructureBoundingBox(x, 64, z, x + 6 - 1, 78, z + 6 - 1);
-            }
-        }
-
-        /**
-         * Initiates construction of the Structure Component picked, at the current
-         * Location of StructGen
-         */
-        @Override
-        public void buildComponent(StructureComponent componentIn, List<StructureComponent> listIn, Random rand)
-        {
-            generateAndAddRoadPiece((Start) componentIn, listIn, rand, this.boundingBox.minX - 1, this.boundingBox.maxY
-                    - 4, this.boundingBox.minZ + 1, EnumFacing.WEST, this.getComponentType());
-            generateAndAddRoadPiece((Start) componentIn, listIn, rand, this.boundingBox.maxX + 1, this.boundingBox.maxY
-                    - 4, this.boundingBox.minZ + 1, EnumFacing.EAST, this.getComponentType());
-            generateAndAddRoadPiece((Start) componentIn, listIn, rand, this.boundingBox.minX + 1, this.boundingBox.maxY
-                    - 4, this.boundingBox.minZ - 1, EnumFacing.NORTH, this.getComponentType());
-            generateAndAddRoadPiece((Start) componentIn, listIn, rand, this.boundingBox.minX + 1, this.boundingBox.maxY
-                    - 4, this.boundingBox.maxZ + 1, EnumFacing.SOUTH, this.getComponentType());
-        }
-
-        /**
-         * second Part of Structure generating, this for example places Spiderwebs, Mob
-         * Spawners, it closes Mineshafts at the end, it adds Fences...
-         */
-        @Override
-        public boolean addComponentParts(World worldIn, Random randomIn, StructureBoundingBox structureBoundingBoxIn)
-        {
-            if (this.averageGroundLvl < 0)
-            {
-                this.averageGroundLvl = this.getAverageGroundLevel(worldIn, structureBoundingBoxIn);
-
-                if (this.averageGroundLvl < 0)
-                {
-                    return true;
-                }
-
-                this.boundingBox.offset(0, this.averageGroundLvl - this.boundingBox.maxY + 3, 0);
-            }
-
-            IBlockState iblockstate = this.getBiomeSpecificBlockState(Blocks.COBBLESTONE.getDefaultState());
-            IBlockState iblockstate1 = this.getBiomeSpecificBlockState(Blocks.OAK_FENCE.getDefaultState());
-            this.fillWithBlocks(worldIn, structureBoundingBoxIn, 1, 0, 1, 4, 12, 4, iblockstate, Blocks.FLOWING_WATER.getDefaultState(), false);
-            this.setBlockState(worldIn, Blocks.AIR.getDefaultState(), 2, 12, 2, structureBoundingBoxIn);
-            this.setBlockState(worldIn, Blocks.AIR.getDefaultState(), 3, 12, 2, structureBoundingBoxIn);
-            this.setBlockState(worldIn, Blocks.AIR.getDefaultState(), 2, 12, 3, structureBoundingBoxIn);
-            this.setBlockState(worldIn, Blocks.AIR.getDefaultState(), 3, 12, 3, structureBoundingBoxIn);
-            this.setBlockState(worldIn, iblockstate1, 1, 13, 1, structureBoundingBoxIn);
-            this.setBlockState(worldIn, iblockstate1, 1, 14, 1, structureBoundingBoxIn);
-            this.setBlockState(worldIn, iblockstate1, 4, 13, 1, structureBoundingBoxIn);
-            this.setBlockState(worldIn, iblockstate1, 4, 14, 1, structureBoundingBoxIn);
-            this.setBlockState(worldIn, iblockstate1, 1, 13, 4, structureBoundingBoxIn);
-            this.setBlockState(worldIn, iblockstate1, 1, 14, 4, structureBoundingBoxIn);
-            this.setBlockState(worldIn, iblockstate1, 4, 13, 4, structureBoundingBoxIn);
-            this.setBlockState(worldIn, iblockstate1, 4, 14, 4, structureBoundingBoxIn);
-            this.fillWithBlocks(worldIn, structureBoundingBoxIn, 1, 15, 1, 4, 15, 4, iblockstate, iblockstate, false);
-
-            for (int i = 0; i <= 5; ++i)
-            {
-                for (int j = 0; j <= 5; ++j)
-                {
-                    if (j == 0 || j == 5 || i == 0 || i == 5)
-                    {
-                        this.setBlockState(worldIn, iblockstate, j, 11, i, structureBoundingBoxIn);
-                        this.clearCurrentPositionBlocksUpwards(worldIn, j, 12, i, structureBoundingBoxIn);
-                    }
-                }
-            }
-
-            return true;
         }
     }
 

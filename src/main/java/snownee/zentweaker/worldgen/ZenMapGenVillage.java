@@ -18,7 +18,7 @@ public class ZenMapGenVillage extends MapGenVillage
     {
         try
         {
-            return new ZenMapGenVillage.Start(this.world, this.rand, chunkX, chunkZ, this.size);
+            return new Start(this.world, this.rand, chunkX, chunkZ, this.size);
         }
         catch (Exception e)
         {
@@ -70,7 +70,7 @@ public class ZenMapGenVillage extends MapGenVillage
 
             for (StructureComponent structurecomponent1 : this.components)
             {
-                if (!(structurecomponent1 instanceof StructureVillagePieces.Road))
+                if (!(structurecomponent1 instanceof ZenStructureVillagePieces.Road))
                 {
                     ++k;
                 }
