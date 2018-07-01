@@ -2,16 +2,20 @@ package snownee.zentweaker.features;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.registry.GameRegistry.ObjectHolder;
 import net.minecraftforge.oredict.OreDictionary;
 
 @EventBusSubscriber
 public class NoTreePunching
 {
+    @ObjectHolder("mekanism:atomicdisassembler")
+    private static final Item DISASSEMBLER = null;
 
     private static final int ORE_LOG_WOOD = OreDictionary.getOreID("logWood");
 
@@ -53,6 +57,10 @@ public class NoTreePunching
             return false;
         }
         ItemStack tool = player.getHeldItemMainhand();
+        if (DISASSEMBLER != null && tool.getItem() == DISASSEMBLER)
+        {
+            return true;
+        }
         return !tool.isEmpty() && tool.getItem().getToolClasses(tool).contains("axe");
     }
 
