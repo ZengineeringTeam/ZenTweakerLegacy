@@ -44,7 +44,7 @@ minecraft {
 
 dependencies {
     deobfCompile "mezz.jei:jei_${minecraft_version}:${jei_version}"
-    provided "libs/ToughAsNails-1.12.2-3.1.0.121-universal.jar"
+    provided files('libs/ToughAsNails-1.12.2-3.1.0.121-universal.jar')
 }
 
 processResources {
