@@ -3,10 +3,13 @@ package snownee.zentweaker;
 import org.apache.logging.log4j.Logger;
 
 import net.minecraft.init.Items;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import snownee.zentweaker.features.AutoStructureAlloySmelter;
 import snownee.zentweaker.features.RegisterOres;
 import snownee.zentweaker.potions.ZTPotion;
 import snownee.zentweaker.worldgen.ZenStructureVillagePieces;
@@ -34,5 +37,9 @@ public class ZenTweaker
         Items.WOODEN_AXE.setMaxDamage(5).setNoRepair().setHarvestLevel("axe", 1);
         ZenStructureVillagePieces.registerVillagePieces();
         ZTPotion.init();
+        if (Loader.isModLoaded("immersiveengineering"))
+        {
+            MinecraftForge.EVENT_BUS.register(new AutoStructureAlloySmelter());
+        }
     }
 }
