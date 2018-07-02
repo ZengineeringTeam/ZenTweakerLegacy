@@ -3,16 +3,11 @@ package snownee.zentweaker;
 import org.apache.logging.log4j.Logger;
 
 import net.minecraft.init.Items;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
-import snownee.zentweaker.features.EmptyHandToDrink;
 import snownee.zentweaker.features.RegisterOres;
-import snownee.zentweaker.network.PlayerDrinkPacket;
-import snownee.zentweaker.network.ZTNetworkChannel;
 import snownee.zentweaker.worldgen.ZenStructureVillagePieces;
 
 @Mod(modid = ZenTweaker.MODID, name = ZenTweaker.NAME, version = "@VERSION_INJECT@")
@@ -37,10 +32,5 @@ public class ZenTweaker
         Items.WOODEN_PICKAXE.setMaxDamage(5).setNoRepair();
         Items.WOODEN_AXE.setMaxDamage(5).setNoRepair().setHarvestLevel("axe", 1);
         ZenStructureVillagePieces.registerVillagePieces();
-        if (Loader.isModLoaded("toughasnails"))
-        {
-            ZTNetworkChannel.INSTANCE.register(PlayerDrinkPacket.class);
-            MinecraftForge.EVENT_BUS.register(new EmptyHandToDrink());
-        }
     }
 }
