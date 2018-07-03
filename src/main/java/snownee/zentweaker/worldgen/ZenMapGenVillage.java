@@ -8,7 +8,6 @@ import net.minecraft.world.World;
 import net.minecraft.world.gen.structure.MapGenVillage;
 import net.minecraft.world.gen.structure.StructureComponent;
 import net.minecraft.world.gen.structure.StructureStart;
-import net.minecraft.world.gen.structure.StructureVillagePieces;
 import net.minecraft.world.gen.structure.StructureVillagePieces.PieceWeight;
 
 public class ZenMapGenVillage extends MapGenVillage
@@ -42,8 +41,8 @@ public class ZenMapGenVillage extends MapGenVillage
         {
             super(x, z);
             List<PieceWeight> list = ZenStructureVillagePieces.getStructureVillageWeightedPieceList(rand, size);
-            ZenStructureVillagePieces.Start start = new ZenStructureVillagePieces.Start(worldIn.getBiomeProvider(), 0, rand, (x << 4)
-                    + 2, (z << 4) + 2, list, size);
+            ZenStructureVillagePieces.Start start = new ZenStructureVillagePieces.Start(worldIn.getBiomeProvider(), 0,
+                    rand, (x << 4) + 2, (z << 4) + 2, list, size);
             this.components.add(start);
             start.buildComponent(start, this.components, rand);
             List<StructureComponent> list1 = start.pendingRoads;

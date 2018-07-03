@@ -24,7 +24,8 @@ public class BetterVillageGen
     public void onSpecificBlockState(BiomeEvent.GetVillageBlockID event)
     {
 
-        if (event.getResult() != Result.DEFAULT || event.getOriginal().getBlock() != Blocks.OAK_FENCE || !(event.getBiome() instanceof BiomeDesert))
+        if (event.getResult() != Result.DEFAULT || event.getOriginal().getBlock() != Blocks.OAK_FENCE
+                || !(event.getBiome() instanceof BiomeDesert))
         {
             return;
         }

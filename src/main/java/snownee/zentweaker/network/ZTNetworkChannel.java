@@ -55,7 +55,8 @@ public final class ZTNetworkChannel
 
     public void sendToAllAround(ZTPacket packet, int dim, double x, double y, double z, double range)
     {
-        channel.sendToAllAround(new FMLProxyPacket(new PacketBuffer(unpack(packet)), ZenTweaker.MODID), new NetworkRegistry.TargetPoint(dim, x, y, z, range));
+        channel.sendToAllAround(new FMLProxyPacket(new PacketBuffer(unpack(packet)), ZenTweaker.MODID),
+                new NetworkRegistry.TargetPoint(dim, x, y, z, range));
     }
 
     public void sendToDimension(ZTPacket packet, int dim)
@@ -113,8 +114,7 @@ public final class ZTNetworkChannel
     @SideOnly(Side.CLIENT)
     private void handleOnClient(ZTPacket packet, EntityPlayerSP player)
     {
-        Minecraft.getMinecraft().addScheduledTask(() ->
-        {
+        Minecraft.getMinecraft().addScheduledTask(() -> {
             try
             {
                 packet.handleClient(player);
@@ -128,8 +128,7 @@ public final class ZTNetworkChannel
 
     private void handleOnServer(ZTPacket packet, EntityPlayerMP player)
     {
-        FMLCommonHandler.instance().getMinecraftServerInstance().addScheduledTask(() ->
-        {
+        FMLCommonHandler.instance().getMinecraftServerInstance().addScheduledTask(() -> {
             try
             {
                 packet.handleServer(player);

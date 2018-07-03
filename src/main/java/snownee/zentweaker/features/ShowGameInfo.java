@@ -28,8 +28,8 @@ public class ShowGameInfo
         if (event.getSide() == Side.CLIENT && event.getItemStack().getItem() == ItemRegistry.itemDepthMeter)
         {
             EntityPlayer player = event.getEntityPlayer();
-            player.sendStatusMessage(new TextComponentTranslation("gui.zentweaker.depth", player.world.getSeaLevel()
-                    - (int) player.posY), true);
+            player.sendStatusMessage(new TextComponentTranslation("gui.zentweaker.depth",
+                    player.world.getSeaLevel() - (int) player.posY), true);
             event.setCancellationResult(EnumActionResult.SUCCESS);
         }
     }
@@ -100,8 +100,8 @@ public class ShowGameInfo
                 }
                 else if (showXZ && !showY)
                 {
-                    left.set(i, String.format("Chunk: %d ? %d in %d ? %d", blockpos.getX() & 15, blockpos.getZ()
-                            & 15, blockpos.getX() >> 4, blockpos.getZ() >> 4));
+                    left.set(i, String.format("Chunk: %d ? %d in %d ? %d", blockpos.getX() & 15, blockpos.getZ() & 15,
+                            blockpos.getX() >> 4, blockpos.getZ() >> 4));
                 }
                 continue;
             }
