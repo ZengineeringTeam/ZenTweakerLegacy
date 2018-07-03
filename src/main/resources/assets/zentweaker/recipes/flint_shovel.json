@@ -1,7 +1,7 @@
 {
   "type": "forge:ore_shaped",
   "result": {
-    "item": "minecraft:wooden_shovel",
+    "item": "zentweaker:flint_shovel",
     "data": 0
   },
   "pattern": [

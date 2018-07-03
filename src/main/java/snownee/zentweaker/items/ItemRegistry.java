@@ -17,16 +17,23 @@ public class ItemRegistry
     public static Item itemPlantFibre;
     public static Item itemPlantString;
     public static Item itemDepthMeter;
+    public static Item itemFlintAxe;
+    public static Item itemFlintPickaxe;
+    public static Item itemFlintShovel;
 
     @SubscribeEvent
     public static void onItemRegister(RegistryEvent.Register<Item> event)
     {
-        event.getRegistry().register(itemPlantFibre = new Item().setRegistryName(ZenTweaker.MODID, "plant_fibre").setUnlocalizedName(ZenTweaker.MODID
-                + ".plant_fibre"));
-        event.getRegistry().register(itemPlantString = new Item().setRegistryName(ZenTweaker.MODID, "plant_string").setUnlocalizedName(ZenTweaker.MODID
-                + ".plant_string"));
-        event.getRegistry().register(itemDepthMeter = new Item().setRegistryName(ZenTweaker.MODID, "depth_meter").setUnlocalizedName(ZenTweaker.MODID
-                + ".depth_meter").setMaxStackSize(1).setCreativeTab(CreativeTabs.TOOLS));
+        event.getRegistry().register(itemPlantFibre = new Item().setRegistryName(ZenTweaker.MODID, "plant_fibre")
+                .setUnlocalizedName(ZenTweaker.MODID + ".plant_fibre"));
+        event.getRegistry().register(itemPlantString = new Item().setRegistryName(ZenTweaker.MODID, "plant_string")
+                .setUnlocalizedName(ZenTweaker.MODID + ".plant_string"));
+        event.getRegistry()
+                .register(itemDepthMeter = new Item().setRegistryName(ZenTweaker.MODID, "depth_meter")
+                        .setUnlocalizedName(ZenTweaker.MODID + ".depth_meter").setMaxStackSize(1)
+                        .setCreativeTab(CreativeTabs.TOOLS));
+        event.getRegistry().registerAll(itemFlintAxe = new ItemFlintAxe(), itemFlintPickaxe = new ItemFlintPickaxe(),
+                itemFlintShovel = new ItemFlintShovel());
     }
 
     @SubscribeEvent
@@ -36,5 +43,8 @@ public class ItemRegistry
         ModelUtil.mapItemModel(itemPlantFibre);
         ModelUtil.mapItemModel(itemPlantString);
         ModelUtil.mapItemModel(itemDepthMeter);
+        ModelUtil.mapItemModel(itemFlintAxe);
+        ModelUtil.mapItemModel(itemFlintPickaxe);
+        ModelUtil.mapItemModel(itemFlintShovel);
     }
 }

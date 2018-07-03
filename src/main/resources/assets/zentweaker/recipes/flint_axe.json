@@ -1,7 +1,7 @@
 {
   "type": "forge:ore_shaped",
   "result": {
-    "item": "minecraft:wooden_axe",
+    "item": "zentweaker:flint_axe",
     "data": 0
   },
   "pattern": [

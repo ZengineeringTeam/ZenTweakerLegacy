@@ -25,8 +25,8 @@ public class NoTreePunching
     @SubscribeEvent
     public static void onPlayerBreaking(PlayerEvent.BreakSpeed event)
     {
-        event.getEntityPlayer().addItemStackToInventory(new ItemStack(event.getState().getBlock()));
-        if (isLog(event.getState(), event.getEntityPlayer().world, event.getPos()) && !canPunchTree(event.getEntityPlayer()))
+        if (isLog(event.getState(), event.getEntityPlayer().world, event.getPos())
+                && !canPunchTree(event.getEntityPlayer()))
         {
             event.setNewSpeed(event.getOriginalSpeed() / 4);
         }
