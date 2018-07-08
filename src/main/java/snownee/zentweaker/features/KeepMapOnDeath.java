@@ -41,7 +41,7 @@ public final class KeepMapOnDeath
     public static void itemDrop(PlayerDropsEvent event)
     {
         if (event.getEntityPlayer() == null || event.getEntityPlayer() instanceof FakePlayer
-                || event.getEntityPlayer().world.getGameRules().getBoolean("keepInventory") || event.isCanceled())
+                || event.getEntityPlayer().world.getGameRules().getBoolean("keepInventory"))
         {
             return;
         }
