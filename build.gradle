@@ -25,6 +25,10 @@ repositories {
         name = "jei"
         url = "http://dvs1.progwml6.com/files/maven"
     }
+    maven {
+        name = "curseforge" // You know, overkill
+        url = "https://minecraft.curseforge.com/api/maven/"
+    }
 }
 
 jar {
@@ -44,7 +48,7 @@ minecraft {
 
 dependencies {
     deobfCompile "mezz.jei:jei_${minecraft_version}:${jei_version}"
-    provided files('libs/ToughAsNails-1.12.2-3.1.0.121-universal.jar')
+    deobfCompile "tough-as-nails:ToughAsNails-1.12.2:3.1.0.124:universal"
 }
 
 processResources {
