@@ -36,8 +36,7 @@ public class ZenTweaker
         Items.WOODEN_PICKAXE.setMaxDamage(5).setNoRepair();
         Items.WOODEN_AXE.setMaxDamage(5).setNoRepair().setHarvestLevel("axe", 1);
         ZenStructureVillagePieces.registerVillagePieces();
-        ZTPotion.init();
-        if (Loader.isModLoaded("immersiveengineering"))
+        if (Loader.isModLoaded("immersiveengineering")) // TODO why not just hard-depend on it
         {
             MinecraftForge.EVENT_BUS.register(new AutoStructureAlloySmelter());
         }

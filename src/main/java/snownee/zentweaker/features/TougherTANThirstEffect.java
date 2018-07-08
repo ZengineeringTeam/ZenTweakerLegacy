@@ -22,7 +22,7 @@ public final class TougherTANThirstEffect {
     public static void overrideTANPotion(RegistryEvent.Register<Potion> event)
     {
         // Intentionally override the registry, so that we can have our logic "hijacking" the original one
-        event.getRegistry().register(new TougherTANPotionThirst().setRegistryName("toughasnails:thirst"));
+        event.getRegistry().register(new TougherTANPotionThirst().setRegistryName("toughasnails:thirst").setPotionName("potion.thirst"));
     }
 
     static final class TougherTANPotionThirst extends PotionThirst
@@ -33,15 +33,22 @@ public final class TougherTANThirstEffect {
 
         @Override
         public void performEffect(EntityLivingBase entity, int amplifier) {
+            if (entity.world.isRemote)
+            {
+                return; // I don't know why but this is possible...
+            }
             super.performEffect(entity, amplifier);
-
+            if (entity.getRNG().nextInt(50) != 0)
+            {
+                return;
+            }
             int magicNumber = entity.getRNG().nextInt(4);
             switch (magicNumber)
             {
                 case 0: default: break; // You are lucky
-                case 1: entity.addPotionEffect(new PotionEffect(MobEffects.NAUSEA, amplifier)); break;
-                case 2: entity.addPotionEffect(new PotionEffect(MobEffects.WEAKNESS, amplifier)); break;
-                case 3: entity.addPotionEffect(new PotionEffect(MobEffects.HUNGER, amplifier)); break;
+                case 1: if (!entity.isPotionActive(MobEffects.NAUSEA)) entity.addPotionEffect(new PotionEffect(MobEffects.NAUSEA, 400)); break;
+                case 2: if (!entity.isPotionActive(MobEffects.WEAKNESS)) entity.addPotionEffect(new PotionEffect(MobEffects.WEAKNESS, 400)); break;
+                case 3: if (!entity.isPotionActive(MobEffects.HUNGER)) entity.addPotionEffect(new PotionEffect(MobEffects.HUNGER, 400)); break;
             }
         }
     }
