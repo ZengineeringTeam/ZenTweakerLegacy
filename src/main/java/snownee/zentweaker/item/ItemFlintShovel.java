@@ -1,4 +1,4 @@
-package snownee.zentweaker.items;
+package snownee.zentweaker.item;
 
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
@@ -11,8 +11,9 @@ public class ItemFlintShovel extends ItemSpade
     {
         super(Item.ToolMaterial.WOOD);
         setRegistryName(ZenTweaker.MODID, "flint_shovel");
-        setUnlocalizedName(ZenTweaker.MODID + ".flint_shovel");
+        setTranslationKey(ZenTweaker.MODID + ".flint_shovel");
         setCreativeTab(CreativeTabs.TOOLS);
         setMaxDamage(10);
+        setNoRepair();
     }
 }

@@ -1,12 +1,21 @@
-package snownee.zentweaker.features;
+package snownee.zentweaker.feature;
 
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
+import snownee.kiwi.IModule;
+import snownee.kiwi.KiwiModule;
+import snownee.zentweaker.ZenTweaker;
 
-public class RegisterOres
+@KiwiModule(modid = ZenTweaker.MODID, name = "RegisterWildcardOres", optional = true)
+public class RegisterWildcardOres implements IModule
 {
-    public RegisterOres()
+    public RegisterWildcardOres()
+    {
+    }
+
+    @Override
+    public void init()
     {
         regOre("logOak", "biomesoplenty:log_0");
         regOre("logOak", "biomesoplenty:log_1");

@@ -4,6 +4,12 @@
     "item": "zentweaker:flint_pickaxe",
     "data": 0
   },
+  "conditions": [
+    {
+      "type": "kiwi:optional_enabled",
+      "module": "zentweaker:FlintTools"
+    }
+  ],
   "pattern": [
     "fs",
     "/f"
@@ -13,15 +19,10 @@
       "ore": "stickWood",
       "type": "forge:ore_dict"
     },
-    "s": [
-      {
-        "item": "zentweaker:plant_string"
-      },
-      {
-        "ore": "string",
-        "type": "forge:ore_dict"
-      }
-    ],
+    "s": {
+      "ore": "stringAny",
+      "type": "forge:ore_dict"
+    },
     "f": {
       "item": "minecraft:flint"
     }

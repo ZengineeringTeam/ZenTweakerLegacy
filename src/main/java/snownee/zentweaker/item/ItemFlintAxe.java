@@ -1,4 +1,4 @@
-package snownee.zentweaker.items;
+package snownee.zentweaker.item;
 
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
@@ -11,8 +11,9 @@ public class ItemFlintAxe extends ItemAxe
     {
         super(Item.ToolMaterial.WOOD);
         setRegistryName(ZenTweaker.MODID, "flint_axe");
-        setUnlocalizedName(ZenTweaker.MODID + ".flint_axe");
+        setTranslationKey(ZenTweaker.MODID + ".flint_axe");
         setCreativeTab(CreativeTabs.TOOLS);
         setMaxDamage(10);
+        setNoRepair();
     }
 }

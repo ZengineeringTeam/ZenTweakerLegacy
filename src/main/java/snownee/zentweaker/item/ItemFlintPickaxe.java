@@ -1,4 +1,4 @@
-package snownee.zentweaker.items;
+package snownee.zentweaker.item;
 
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
@@ -11,8 +11,9 @@ public class ItemFlintPickaxe extends ItemPickaxe
     {
         super(Item.ToolMaterial.WOOD);
         setRegistryName(ZenTweaker.MODID, "flint_pickaxe");
-        setUnlocalizedName(ZenTweaker.MODID + ".flint_pickaxe");
+        setTranslationKey(ZenTweaker.MODID + ".flint_pickaxe");
         setCreativeTab(CreativeTabs.TOOLS);
         setMaxDamage(10);
+        setNoRepair();
     }
 }

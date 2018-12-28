@@ -1,7 +1,6 @@
-gui.zentweaker.depth=Depth: %s
-item.zentweaker.depth_meter.name=Depth Meter
+gui.zentweaker.height=Height: %s
 item.zentweaker.plant_string.name=Plant String
 item.zentweaker.plant_fibre.name=Plant Fibre
-item.wooden_axe.name=Flint Axe
-item.wooden_pickaxe.name=Flint Pickaxe
-item.wooden_shovel.name=Flint Shovel
+item.zentweaker.flint_axe.name=Flint Axe
+item.zentweaker.flint_pickaxe.name=Flint Pickaxe
+item.zentweaker.flint_shovel.name=Flint Shovel

@@ -3,6 +3,12 @@
   "result": {
     "item": "zentweaker:plant_string"
   },
+  "conditions": [
+    {
+      "type": "kiwi:optional_enabled",
+      "module": "zentweaker:DropFibreAndFlint"
+    }
+  ],
   "pattern": [
     "**",
     "**"

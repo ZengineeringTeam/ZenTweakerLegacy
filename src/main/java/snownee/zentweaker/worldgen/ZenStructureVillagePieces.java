@@ -44,7 +44,7 @@ import net.minecraft.world.storage.loot.LootTableList;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.registry.VillagerRegistry;
 import snownee.zentweaker.ZenTweaker;
-import snownee.zentweaker.features.BetterVillageGen;
+import snownee.zentweaker.feature.BetterVillageGen;
 
 public class ZenStructureVillagePieces
 {
@@ -66,7 +66,6 @@ public class ZenStructureVillagePieces
         MapGenStructureIO.registerStructureComponent(ZenStructureVillagePieces.House3.class, "ZenViTRH");
         LootTableList.register(new ResourceLocation(ZenTweaker.MODID, "chests/village_bookshelf"));
         LootTableList.register(new ResourceLocation(ZenTweaker.MODID, "chests/village_blacksmith"));
-        MinecraftForge.TERRAIN_GEN_BUS.register(new BetterVillageGen());
     }
 
     public static List<PieceWeight> getStructureVillageWeightedPieceList(Random random, int size)

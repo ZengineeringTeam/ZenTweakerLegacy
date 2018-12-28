@@ -4,6 +4,12 @@
     "item": "zentweaker:flint_shovel",
     "data": 0
   },
+  "conditions": [
+    {
+      "type": "kiwi:optional_enabled",
+      "module": "zentweaker:FlintTools"
+    }
+  ],
   "pattern": [
     " f",
     "/ "
