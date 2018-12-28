@@ -2,6 +2,9 @@ package snownee.zentweaker.feature;
 
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fml.common.Loader;
+import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.oredict.OreDictionary;
 import snownee.kiwi.IModule;
 import snownee.kiwi.KiwiModule;
@@ -42,6 +45,14 @@ public class RegisterWildcardOres implements IModule
 
     private void regOre(String ore, String name)
     {
-        OreDictionary.registerOre(ore, new ItemStack(Item.getByNameOrId(name), 1, OreDictionary.WILDCARD_VALUE));
+        ResourceLocation location = new ResourceLocation(name);
+        if (Loader.isModLoaded(location.getNamespace()))
+        {
+            Item item = ForgeRegistries.ITEMS.getValue(location);
+            if (item != null)
+            {
+                OreDictionary.registerOre(ore, new ItemStack(item, 1, OreDictionary.WILDCARD_VALUE));
+            }
+        }
     }
 }
