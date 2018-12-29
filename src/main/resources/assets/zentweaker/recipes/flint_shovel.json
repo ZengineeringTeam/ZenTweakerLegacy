@@ -7,7 +7,7 @@
   "conditions": [
     {
       "type": "kiwi:is_loaded",
-      "module": "zentweaker:FlintTools"
+      "module": "zentweaker:NoTreePunching"
     }
   ],
   "pattern": [
