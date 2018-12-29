@@ -6,7 +6,7 @@
   },
   "conditions": [
     {
-      "type": "kiwi:optional_enabled",
+      "type": "kiwi:is_loaded",
       "module": "zentweaker:FlintTools"
     }
   ],
