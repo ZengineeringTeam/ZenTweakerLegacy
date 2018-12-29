@@ -1,0 +1,24 @@
+{
+  "type": "forge:ore_shaped",
+  "result": {
+    "item": "zentweaker:fire_charger"
+  },
+  "conditions": [
+    {
+      "type": "kiwi:is_loaded",
+      "module": "zentweaker:FireCharger"
+    }
+  ],
+  "pattern": [
+    "fs",
+    "sf"
+  ],
+  "key": {
+    "s": {
+      "item": "zentweaker:plant_fibre"
+    },
+    "f": {
+      "item": "minecraft:flint"
+    }
+  }
+}
