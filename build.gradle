@@ -26,6 +26,14 @@ repositories {
         url = "http://dvs1.progwml6.com/files/maven"
     }
     maven {
+        name = 'tterrag maven'
+        url = "http://maven.tterrag.com/"
+    }
+    maven {
+        name = "jared"
+        url = "http://maven.blamejared.com"
+    }
+    maven {
         name = "curseforge" // You know, overkill
         url = "https://minecraft.curseforge.com/api/maven/"
     }
@@ -47,8 +55,12 @@ minecraft {
 }
 
 dependencies {
-    deobfCompile "mezz.jei:jei_${minecraft_version}:${jei_version}"
-    deobfCompile "immersive-engineering:ImmersiveEngineering:0.12:82"
+    compile "mezz.jei:jei_${minecraft_version}:${jei_version}"
+    
+    deobfCompile "CraftTweaker2:CraftTweaker2-MC1120-Main:1.12-${ct_version}"
+    deobfCompile "CraftTweaker2:CraftTweaker2-API:${ct_version}"
+    deobfCompile "CraftTweaker2:ZenScript:${ct_version}"
+
     compile files(
         'Kiwi-1.12.2-0.5.0-deobf.jar'
     )
