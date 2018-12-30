@@ -3,6 +3,7 @@ package snownee.zentweaker.feature;
 import snownee.kiwi.IModule;
 import snownee.kiwi.KiwiModule;
 import snownee.zentweaker.ZenTweaker;
+import snownee.zentweaker.block.BlockLight;
 import snownee.zentweaker.item.ItemFireCharger;
 
 @KiwiModule(modid = ZenTweaker.MODID, name = "FireCharger", optional = true)

@@ -1,4 +1,4 @@
-package snownee.zentweaker.feature;
+package snownee.zentweaker.block;
 
 import java.util.Random;
 
