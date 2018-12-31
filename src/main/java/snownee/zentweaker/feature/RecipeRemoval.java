@@ -20,6 +20,8 @@ import mezz.jei.gui.recipes.RecipeLayout;
 import mezz.jei.gui.recipes.RecipesGui;
 import mezz.jei.input.MouseHelper;
 import mezz.jei.plugins.vanilla.crafting.CraftingRecipeCategory;
+import mezz.jei.plugins.vanilla.furnace.FurnaceSmeltingCategory;
+import mezz.jei.plugins.vanilla.furnace.SmeltingRecipe;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.audio.PositionedSoundRecord;
 import net.minecraft.entity.player.EntityPlayer;
@@ -60,11 +62,7 @@ public class RecipeRemoval implements IModule
                 {
                     return;
                 }
-                IRecipeCategory category = logic.getSelectedRecipeCategory();
-                if (category.getClass() != CraftingRecipeCategory.class)
-                {
-                    return;
-                }
+
                 List<RecipeLayout> recipeLayouts = ReflectionHelper.<List<RecipeLayout>, RecipesGui>getPrivateValue(RecipesGui.class, recipesGui, "recipeLayouts");
                 int mouseX = MouseHelper.getX();
                 int mouseY = MouseHelper.getY();
@@ -92,70 +90,108 @@ public class RecipeRemoval implements IModule
                 {
                     return;
                 }
-
                 IRecipeWrapper recipeWrapper = ReflectionHelper.<IRecipeWrapper, RecipeLayout>getPrivateValue(RecipeLayout.class, hoveredLayout, "recipeWrapper");
-                if (!(recipeWrapper instanceof ICraftingRecipeWrapper))
+
+                IRecipeCategory category = logic.getSelectedRecipeCategory();
+                if (category.getClass() == CraftingRecipeCategory.class)
+                {
+                    if (!(recipeWrapper instanceof ICraftingRecipeWrapper))
+                    {
+                        return;
+                    }
+
+                    ResourceLocation name = ((ICraftingRecipeWrapper) recipeWrapper).getRegistryName();
+                    if (name == null)
+                    {
+                        return;
+                    }
+                    addRemoveLine(String.format("recipes.removeByRecipeName(\"%s\");", name));
+                }
+                else if (category.getClass() == FurnaceSmeltingCategory.class)
+                {
+                    if (!(recipeWrapper instanceof SmeltingRecipe))
+                    {
+                        return;
+                    }
+
+                    ItemStack output = ReflectionHelper.<ItemStack, SmeltingRecipe>getPrivateValue(SmeltingRecipe.class, (SmeltingRecipe) recipeWrapper, "output");
+                    if (output == null || output.isEmpty())
+                    {
+                        return;
+                    }
+                    addRemoveLine(String.format("furnace.remove(%s);", getBracket(output)));
+                }
+                else
                 {
                     return;
-                }
-
-                ResourceLocation name = ((ICraftingRecipeWrapper) recipeWrapper).getRegistryName();
-                if (name == null)
-                {
-                    return;
-                }
-
-                File scriptFile = new File(new File("scripts"), String.format("/%s.zs", "recipes"));
-                if (!scriptFile.exists())
-                {
-                    generateFile(scriptFile);
-                }
-                try
-                {
-                    List<String> lines = new LinkedList<>();
-                    BufferedReader reader = new BufferedReader(new FileReader(scriptFile));
-                    String line;
-                    while ((line = reader.readLine()) != null)
-                    {
-                        lines.add(line);
-                    }
-                    if (lines.isEmpty())
-                    {
-                        generateFile(scriptFile);
-                        while ((line = reader.readLine()) != null)
-                        {
-                            lines.add(line);
-                        }
-                    }
-                    reader.close();
-                    PrintWriter writer = new PrintWriter(new FileWriter(scriptFile));
-                    for (int i = 0; i < lines.size(); i++)
-                    {
-                        String beforeLine = "";
-                        if (i > 0)
-                            beforeLine = lines.get(i - 1);
-
-                        String lined = lines.get(i);
-                        if (beforeLine.trim().equals("//#Remove"))
-                        {
-                            writer.println(String.format("recipes.removeByRecipeName(\"%s\");", name));
-                        }
-                        if (!lined.isEmpty())
-                        {
-                            writer.println(lined);
-                        }
-                    }
-                    writer.close();
-                }
-                catch (IOException e)
-                {
-                    e.printStackTrace();
                 }
 
                 EntityPlayer player = Minecraft.getMinecraft().player;
                 PositionedSoundRecord record = new PositionedSoundRecord(SoundEvents.ENTITY_PLAYER_LEVELUP, SoundCategory.PLAYERS, 0.8F, 1, (float) player.posX, (float) player.posY, (float) player.posZ);
                 Minecraft.getMinecraft().getSoundHandler().playSound(record);
             }
+        }
+    }
+
+    public String getBracket(ItemStack stack)
+    {
+        if (stack.getHasSubtypes())
+        {
+            return String.format("<%s:%s>", stack.getItem().getRegistryName(), stack.getMetadata());
+        }
+        else
+        {
+            return String.format("<%s>", stack.getItem().getRegistryName());
+        }
+    }
+
+    public void addRemoveLine(String str)
+    {
+        File scriptFile = new File(new File("scripts"), String.format("/%s.zs", "recipes"));
+        if (!scriptFile.exists())
+        {
+            generateFile(scriptFile);
+        }
+        try
+        {
+            List<String> lines = new LinkedList<>();
+            BufferedReader reader = new BufferedReader(new FileReader(scriptFile));
+            String line;
+            while ((line = reader.readLine()) != null)
+            {
+                lines.add(line);
+            }
+            if (lines.isEmpty())
+            {
+                generateFile(scriptFile);
+                while ((line = reader.readLine()) != null)
+                {
+                    lines.add(line);
+                }
+            }
+            reader.close();
+            PrintWriter writer = new PrintWriter(new FileWriter(scriptFile));
+            for (int i = 0; i < lines.size(); i++)
+            {
+                String beforeLine = "";
+                if (i > 0)
+                    beforeLine = lines.get(i - 1);
+
+                String lined = lines.get(i);
+                if (beforeLine.trim().equals("//#Remove"))
+                {
+                    writer.println(str);
+                }
+                if (!lined.isEmpty())
+                {
+                    writer.println(lined);
+                }
+            }
+            writer.close();
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
         }
     }
 
