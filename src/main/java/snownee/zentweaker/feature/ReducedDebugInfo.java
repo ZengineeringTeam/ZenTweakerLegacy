@@ -99,9 +99,13 @@ public class ReducedDebugInfo implements IModule
         }
 
         ArrayList<String> left = event.getLeft();
-        for (int i = left.size() - 1; i > 1; i--)
+        for (int i = left.size() - 1; i > 1; --i)
         {
             String s = left.get(i);
+            if (s == null)
+            {
+                continue; // Idk how it happens, but it happened.
+            }
             if ((showXZ || showY) && s.startsWith("Block:"))
             {
                 if (!showXZ && showY)
