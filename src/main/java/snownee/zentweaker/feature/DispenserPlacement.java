@@ -70,7 +70,7 @@ public class DispenserPlacement implements IModule
         public ItemStack dispense(IBlockSource source, ItemStack stack)
         {
             EnumFacing facing = source.getBlockState().getValue(BlockDispenser.FACING);
-            Block block = Block.getBlockFromItem(stack.getItem());
+            Block block = ((ItemBlock) stack.getItem()).getBlock();
 
             BlockPos pos = source.getBlockPos().offset(facing);
             World world = source.getWorld();
