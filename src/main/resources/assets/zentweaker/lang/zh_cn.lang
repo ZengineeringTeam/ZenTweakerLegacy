@@ -1,8 +1,8 @@
 gui.zentweaker.height=高度：%s
-item.zentweaker.depth_meter.name=深度计
 item.zentweaker.plant_string.name=草绳
 item.zentweaker.plant_fibre.name=植物纤维
 item.zentweaker.flint_axe.name=燧石斧
 item.zentweaker.flint_pickaxe.name=燧石镐
 item.zentweaker.flint_shovel.name=燧石铲
 item.zentweaker.fire_charger.name=点火器
+tile.zentweaker.unfired.name=未烧制的瓷砖

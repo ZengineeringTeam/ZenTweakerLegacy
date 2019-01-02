@@ -4,7 +4,8 @@
     "model": "zentweaker:brick",
     "uvlock": false,
     "textures": {
-      "all": "ceramics:blocks/porcelain"
+      "all": "ceramics:blocks/porcelain",
+      "particle": "#all"
     }
   },
   "variants": {

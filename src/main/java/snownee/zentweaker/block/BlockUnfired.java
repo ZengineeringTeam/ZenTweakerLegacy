@@ -6,11 +6,16 @@ import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.IStringSerializable;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
+import net.minecraft.world.World;
 import snownee.kiwi.block.BlockMod;
+import snownee.zentweaker.feature.UnfiredBlocks;
 
 public class BlockUnfired extends BlockMod
 {
@@ -45,6 +50,21 @@ public class BlockUnfired extends BlockMod
     protected BlockStateContainer createBlockState()
     {
         return new BlockStateContainer(this, TYPE);
+    }
+
+    @Override
+    public void getDrops(NonNullList<ItemStack> drops, IBlockAccess world, BlockPos pos, IBlockState state, int fortune)
+    {
+        if (!UnfiredBlocks.UNFIRED_CLAY.isEmpty())
+        {
+            drops.add(UnfiredBlocks.UNFIRED_CLAY.copy());
+        }
+    }
+
+    @Override
+    public boolean canSilkHarvest(World world, BlockPos pos, IBlockState state, EntityPlayer player)
+    {
+        return true;
     }
 
     @Override
