@@ -1,0 +1,16 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "zentweaker:brick",
+    "uvlock": false,
+    "textures": {
+      "all": "ceramics:blocks/porcelain"
+    }
+  },
+  "variants": {
+    "type": {
+      "porcelain": {}
+    },
+    "inventory": [{}]
+  }
+}
