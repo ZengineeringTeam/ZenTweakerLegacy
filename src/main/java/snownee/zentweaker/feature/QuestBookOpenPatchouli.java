@@ -22,7 +22,7 @@ import vazkii.patchouli.common.book.BookRegistry;
 import vazkii.patchouli.common.network.NetworkHandler;
 import vazkii.patchouli.common.network.message.MessageOpenBookGui;
 
-@KiwiModule(modid = ZenTweaker.MODID, name = "QuestBookOpenPatchouli", optional = true)
+@KiwiModule(modid = ZenTweaker.MODID, name = "QuestBookOpenPatchouli", optional = true, dependency = "patchouli")
 public class QuestBookOpenPatchouli implements IModule
 {
     private Item item;
@@ -68,7 +68,6 @@ public class QuestBookOpenPatchouli implements IModule
         }
 
         event.setCancellationResult(EnumActionResult.SUCCESS);
-        event.setCanceled(true);
         return;
     }
 
