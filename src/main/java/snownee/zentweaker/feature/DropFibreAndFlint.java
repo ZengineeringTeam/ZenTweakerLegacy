@@ -37,17 +37,14 @@ public class DropFibreAndFlint implements IModule
     public void onBlockDrops(BlockEvent.HarvestDropsEvent event)
     {
         List<ItemStack> drops = event.getDrops();
-        if (event.isSilkTouching() || !drops.isEmpty() || drops instanceof ImmutableList)
+        if (event.isSilkTouching() || drops.isEmpty() || drops instanceof ImmutableList)
         {
             return;
         }
-        if (event.getState().getBlock().getRegistryName().getPath().equals("dirt") && event.getWorld().rand.nextFloat() < 0.15F)
+        if (event.getWorld().rand.nextFloat() < 0.3F && event.getState().getBlock().getRegistryName().getPath().equals("dirt") && event.getWorld().rand.nextFloat() < 0.15F)
         {
-            if (event.getWorld().rand.nextFloat() < 0.4F)
-            {
-                drops.clear();
-                drops.add(new ItemStack(Items.FLINT));
-            }
+            drops.clear();
+            drops.add(new ItemStack(Items.FLINT));
         }
     }
 
