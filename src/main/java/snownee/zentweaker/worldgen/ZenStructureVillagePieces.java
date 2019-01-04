@@ -41,10 +41,8 @@ import net.minecraft.world.gen.structure.StructureVillagePieces;
 import net.minecraft.world.gen.structure.StructureVillagePieces.PieceWeight;
 import net.minecraft.world.gen.structure.template.TemplateManager;
 import net.minecraft.world.storage.loot.LootTableList;
-import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.registry.VillagerRegistry;
 import snownee.zentweaker.ZenTweaker;
-import snownee.zentweaker.feature.BetterVillageGen;
 
 public class ZenStructureVillagePieces
 {

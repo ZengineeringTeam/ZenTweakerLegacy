@@ -1,4 +1,4 @@
-package snownee.zentweaker.plugin;
+package snownee.zentweaker.plugin.jei;
 
 import mezz.jei.api.IJeiRuntime;
 import mezz.jei.api.IModPlugin;

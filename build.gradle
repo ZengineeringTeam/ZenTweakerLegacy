@@ -60,6 +60,7 @@ dependencies {
     deobfCompile "CraftTweaker2:CraftTweaker2-MC1120-Main:1.12-${ct_version}"
     deobfCompile "CraftTweaker2:CraftTweaker2-API:${ct_version}"
     deobfCompile "CraftTweaker2:ZenScript:${ct_version}"
+    deobfCompile "vazkii.patchouli:Patchouli:${patchi_version}"
 
     compile files(
         'Kiwi-1.12.2-0.5.0-deobf.jar'

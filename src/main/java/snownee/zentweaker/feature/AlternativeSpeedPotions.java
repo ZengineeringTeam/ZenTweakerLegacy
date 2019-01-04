@@ -1,7 +1,6 @@
 package snownee.zentweaker.feature;
 
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.potion.Potion;
 import snownee.kiwi.IModule;
 import snownee.kiwi.KiwiModule;
 import snownee.kiwi.potion.PotionMod;

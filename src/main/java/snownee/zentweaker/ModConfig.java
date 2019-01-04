@@ -31,6 +31,22 @@ public final class ModConfig
 
     }
 
+    @Config.Name("Quest Book Open Patchouli")
+    public static final QuestBookOpenPatchouli QuestBookOpenPatchouli = new QuestBookOpenPatchouli();
+
+    public static final class QuestBookOpenPatchouli
+    {
+        QuestBookOpenPatchouli()
+        {
+        }
+
+        @Config.RequiresMcRestart
+        public String QuestBook = "questbook:itemquestbook";
+
+        public String BookID = "patchouli:zengineering";
+
+    }
+
     @SubscribeEvent
     public static void onConfigReload(ConfigChangedEvent.OnConfigChangedEvent event)
     {

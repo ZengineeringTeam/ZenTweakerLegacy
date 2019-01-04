@@ -2,12 +2,9 @@ package snownee.zentweaker;
 
 import org.apache.logging.log4j.Logger;
 
-import net.minecraft.init.Items;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
-import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
-import snownee.zentweaker.worldgen.ZenStructureVillagePieces;
 
 @Mod(modid = ZenTweaker.MODID, name = ZenTweaker.NAME, version = "@VERSION_INJECT@")
 public class ZenTweaker
