@@ -47,6 +47,17 @@ public final class ModConfig
 
     }
 
+    @Config.Name("Jei Plugin")
+    public static final JeiPlugin JeiPlugin = new JeiPlugin();
+
+    public static final class JeiPlugin
+    {
+        public static final String[] HidenJeiCategories = new String[0];
+
+        public static final boolean PrintJeiCategories = true;
+
+    }
+
     @SubscribeEvent
     public static void onConfigReload(ConfigChangedEvent.OnConfigChangedEvent event)
     {
