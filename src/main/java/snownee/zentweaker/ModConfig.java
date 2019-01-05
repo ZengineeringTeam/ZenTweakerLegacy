@@ -52,10 +52,18 @@ public final class ModConfig
 
     public static final class JeiPlugin
     {
-        public static final String[] HidenJeiCategories = new String[0];
+        public String[] HidenJeiCategories = new String[0];
 
-        public static final boolean PrintJeiCategories = true;
+        public boolean PrintJeiCategories = true;
 
+    }
+
+    @Config.Name("Surface Fossil")
+    public static final SurfaceFossil SurfaceFossil = new SurfaceFossil();
+
+    public static class SurfaceFossil
+    {
+        public int Chance = 64;
     }
 
     @SubscribeEvent

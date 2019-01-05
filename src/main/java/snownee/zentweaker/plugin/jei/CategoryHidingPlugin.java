@@ -13,7 +13,6 @@ import snownee.zentweaker.ModConfig;
 @JEIPlugin
 public class CategoryHidingPlugin implements IModPlugin
 {
-    @SuppressWarnings("unused")
     @Override
     public void onRuntimeAvailable(IJeiRuntime jeiRuntime)
     {
