@@ -1,0 +1,22 @@
+{
+  "type": "industrialwires:wire_coil",
+  "conditions": [
+    {
+      "type": "kiwi:is_loaded",
+      "module": "zentweaker:TRWireRecipes"
+    }
+  ],
+  "cables": [
+    {
+      "length": 1,
+      "ingredient": {
+        "item": "techreborn:cable",
+        "data": 3
+      }
+    }
+  ],
+  "coil": {
+    "item": "industrialwires:ic2_wire_coil",
+    "data": 3
+  }
+}
