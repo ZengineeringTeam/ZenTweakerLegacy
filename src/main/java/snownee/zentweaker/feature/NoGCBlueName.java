@@ -11,10 +11,9 @@ public class NoGCBlueName implements IModule
 {
     public NoGCBlueName()
     {
-        Class clazz;
         try
         {
-            clazz = Class.forName("micdoodle8.mods.galacticraft.core.proxy.ClientProxyCore");
+            Class clazz = Class.forName("micdoodle8.mods.galacticraft.core.proxy.ClientProxyCore");
             ReflectionHelper.setPrivateValue(clazz, null, EnumRarity.COMMON, "galacticraftItem");
         }
         catch (ClassNotFoundException e)
