@@ -8,6 +8,7 @@ import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.oredict.OreDictionary;
 import snownee.kiwi.IModule;
 import snownee.kiwi.KiwiModule;
+import snownee.zentweaker.ModConfig;
 import snownee.zentweaker.ZenTweaker;
 
 @KiwiModule(modid = ZenTweaker.MODID, name = "RegisterWildcardOres", optional = true)
@@ -20,27 +21,14 @@ public class RegisterWildcardOres implements IModule
     @Override
     public void init()
     {
-        regOre("logOak", "biomesoplenty:log_0");
-        regOre("logOak", "biomesoplenty:log_1");
-        regOre("logOak", "biomesoplenty:log_2");
-        regOre("logOak", "biomesoplenty:log_3");
-        regOre("logOak", "forestry:logs.0");
-        regOre("logOak", "forestry:logs.1");
-        regOre("logOak", "forestry:logs.2");
-        regOre("logOak", "forestry:logs.3");
-        regOre("logOak", "forestry:logs.4");
-        regOre("logOak", "forestry:logs.5");
-        regOre("logOak", "forestry:logs.6");
-        regOre("logOak", "forestry:logs.7");
-        regOre("logOak", "forestry:logs.fireproof.0");
-        regOre("logOak", "forestry:logs.fireproof.1");
-        regOre("logOak", "forestry:logs.fireproof.2");
-        regOre("logOak", "forestry:logs.fireproof.3");
-        regOre("logOak", "forestry:logs.fireproof.4");
-        regOre("logOak", "forestry:logs.fireproof.5");
-        regOre("logOak", "forestry:logs.fireproof.6");
-        regOre("logOak", "forestry:logs.fireproof.7");
-        regOre("dye", "inspirations:dyed_bottle");
+        for (String line : ModConfig.WildcardOres.ores)
+        {
+            String[] parts = line.trim().split("=");
+            if (parts.length == 2)
+            {
+                regOre(parts[0], parts[1]);
+            }
+        }
     }
 
     private void regOre(String ore, String name)

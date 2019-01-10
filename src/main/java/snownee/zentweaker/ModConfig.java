@@ -66,6 +66,14 @@ public final class ModConfig
         public int Chance = 64;
     }
 
+    @Config.Name("Wildcard Ores")
+    public static final WildcardOres WildcardOres = new WildcardOres();
+
+    public static class WildcardOres
+    {
+        public String[] ores = new String[] { "dye=inspirations:dyed_bottle" };
+    }
+
     @SubscribeEvent
     public static void onConfigReload(ConfigChangedEvent.OnConfigChangedEvent event)
     {
